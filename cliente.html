@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DWES Tarea 9</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+    @import url('style.css');
+  </style>
+  <script type="text/javascript">
+    /**
+     * Función que muestra el contenido de JSON de la API al pulsar el botón
+    */
+    function getCatFact() {
+      //Creamos el objeto de la clase XMLHttpRequest
+      var objetoXHR = new XMLHttpRequest();
+      //Usamos el evento que controla el cambio de estado
+      objetoXHR.onreadystatechange = function () {
+        //Si la solicitud está completada y la respuesta es ok
+        if (objetoXHR.readyState === 4 && objetoXHR.status === 200) {
+          //Devolvemos la respuesta
+          var fact = objetoXHR.responseText;
+          //Añadimos la respuesta al párrafo
+          document.getElementById('parrafo').innerHTML = fact;
+        }
+      };
+      //Abrimos la conexión con la API que conecta con la API libre pública
+      objetoXHR.open('GET', 'get_content_api.php');
+      //Enviamos la solicitud
+      objetoXHR.send();
+    }
+  </script>
+</head>
+
+<body class="container">
+  <h1>Random cat facts</h1>
+  <img src="img/img_cat.jpg" alt="cat_with_book" width="300px">
+  <p>Click a button below to get a random cat fact</p>
+  <!--Al pulsar el botón, aparecen los hechos de gatos en el párrafo arriba-->
+  <button onclick="getCatFact();">Get a cat fact</button>
+  <br>
+  <div id="caja">
+  <p id="parrafo"></p>
+</div>
+</body>
+
+</html>
